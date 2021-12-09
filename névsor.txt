@@ -1,0 +1,8 @@
+Bence - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Máté - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Mari - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Lari - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Xiri - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Jani - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+Józsi - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm | --> BMI: 10000.0 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
+KariMari - Kor: 12 éves | Tömeg: 123.0 kg | Magasság: 123.0 cm | --> BMI: 81.30081300813009 - Extrém elhízás // - Kor: 1 éves | Tömeg: 1.0 kg | Magasság: 1.0 cm |  -->  BMI:  10000.0 - Extrém elhízás //
