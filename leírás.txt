@@ -1,6 +1,7 @@
-A program beolvassa a névsort, majd tömbökbe rakja.
+A program beolvassa a névsort, majd kis tömbökbe rakja a neveket, amelyeket egy nagy tömbbe tárolunk.
 A tömbökhöz hozzáadja a személy adatait, melyeket a felhasználó ad meg.
-Miután megvan minden adat (és helyesek is az adatok) visszaírja az eredeti névsor fájljába, de már az adatokkal együtt.
+Miután megvan minden adat (és helyesek is az adatok) visszaírja az eredeti névsor.txt fájlba, de már az adatokkal együtt.
+Az utolsó név után a felhasználó választhat, hogy új személyt ad hozzá vagy kilép a programból.
 Következő futtatás során pedig a meglévő mérés mellé írja be az új mérés adatait.
 
 Az ősosztály maga a személy és a két alosztály a személy tömege és magassága.
