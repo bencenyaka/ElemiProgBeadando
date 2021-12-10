@@ -1,6 +1,9 @@
 from enum import Enum
+from easygui import *
+
 
 class bmi_ertekek(Enum):
+    '''BMI értékhatárok.'''
     Alultáplált = 18.5
     Normál = 25
     Túlsúlyos = 30
@@ -18,75 +21,111 @@ class bmi:
         self.tomeg.show()
         self.magassag.show()
 
-    class tomeg:
-        def __init__(self, tomeg):
-            self.tomeg = tomeg
+class tomeg(bmi):
+    def __init__(self, tomeg):
+        self.tomeg = tomeg
 
-    class magassag:
-        def __init__(self, magassag):
-            self.magassag = magassag
+class magassag(bmi):
+    def __init__(self, magassag):
+        self.magassag = magassag
 
 
 def kalkulacio():
+    '''BMI kalkulálása.'''
     kalkul = bmi.tomeg / ((bmi.magassag / 100) ** 2)
-    return kalkul
+    return round(kalkul)
 
 def menu_opciok():
-    print("Válasszon az alábbi menüpontok közül\n\t0 - Kilépés"
+    '''A felhasználónak lehetőséget ad, hogy akar-e új személyt hozzáadni.'''
+    print("Válasszon a lehetőségek közül.\n\t0 - Kilépés"
           "\n\t1 - Új személy hozzáadása")
 
-tomb = []
+szemelyek = [] #nagy tömb
+print("----------------------------------------------------")
+print("BMI Kalkulátor")
+print("----------------------------------------------------")
+print("Kérem a felhasználó törekedjen valós adatok megadására.")
 
-fki = open("névsor.txt", "r+", encoding="utf8")
+'''File megnyitása.'''
+file = open("névsor.txt", "r+", encoding="utf8")
 
-for sor in fki:
-    sor = sor.strip().split()
-    tomb.append(sor)
+'''A fileban tárolt adatokat eltároljuk kis-tömbökbe, amiket eltárolunk egy nagy tömbbe.'''
+for szemely in file:
+    szemely = szemely.strip().split()
+    szemelyek.append(szemely)
 
-for sor in tomb:
+
+#-----------FŐMODUL--------------
+for szemely in szemelyek:
     try:
-        print("%s" %sor[0])
+        print("\n%s" % szemely[0])
+
+        '''Bekérjük a személy korát, majd leellenőrizzük, hogy jó értéket adott e meg.'''
 
         bmi.kor = int(input("- Kor: "))
-        sor.append("- Kor:")
-        sor.append(str(bmi.kor))
-        sor.append("éves |")
 
-        bmi.tomeg = float(input("Tömeg: "))
-        sor.append("Tömeg:")
-        sor.append(str(bmi.tomeg))
-        sor.append("kg |")
+        '''Ha rossz értéket adott meg újból bekérjük.'''
+        if bmi.kor < 1 or not float and not int:
+            print("Valós értéket adjon meg.")
+            bmi.kor = int(input("- Kor:"))
 
-        bmi.magassag = float(input("Magasság: "))
-        sor.append("Magasság:")
-        sor.append(str(bmi.magassag))
-        sor.append("cm |")
+        '''Jó érték megadása esetén berkajuk egy kis-tömbbe.'''
+        szemely.append("- Kor:")
+        szemely.append(str(bmi.kor))
+        szemely.append("éves |")
+        #kor bekérve
+        '''Megismételjük a tömegnél is ugyanazt, mint a kornál.'''
+        bmi.tomeg = float(input("Tömeg (kg): "))
 
-        sor.append(" -->  BMI: ")
-        sor.append(str(kalkulacio()))
+        if bmi.tomeg < 1 or not float and not int:
+            print("Valós értéket adjon meg.")
+            bmi.tomeg = float(input("Tömeg (kg): "))
 
+        szemely.append("Tömeg:")
+        szemely.append(str(bmi.tomeg))
+        szemely.append("kg |")
+        #tömeg bekérve
+        bmi.magassag = float(input("Magasság (cm): "))
+
+        if bmi.magassag < 1 or not float and not int:
+            print("Valós értéket adjon meg.")
+            bmi.magassag = float(input("Magasság (cm): "))
+
+        szemely.append("Magasság:")
+        szemely.append(str(bmi.magassag))
+        szemely.append("cm |")
+        #magasság bekérve
+
+        szemely.append(" -->  BMI: ")
+        szemely.append(str(kalkulacio()))
+        #BMI értéke is a tömbbe került
+
+        '''Megnézzük, hogy a számolt bmi érték, melyik csoportba tartozik.'''
         if kalkulacio() < bmi_ertekek.Alultáplált.value:
-            sor.append("- %s //" %bmi_ertekek.Alultáplált.name)
+            szemely.append("- %s //" % bmi_ertekek.Alultáplált.name)
 
         if kalkulacio() >= bmi_ertekek.Alultáplált.value and kalkulacio() < bmi_ertekek.Normál.value:
-            sor.append("- %s testsúly //" %bmi_ertekek.Normál.name)
+            szemely.append("- %s testsúly //" % bmi_ertekek.Normál.name)
 
         if kalkulacio() < bmi_ertekek.Túlsúlyos.value and kalkulacio() >= bmi_ertekek.Normál.value:
-            sor.append("- %s //" %bmi_ertekek.Túlsúlyos.name)
+            szemely.append("- %s //" % bmi_ertekek.Túlsúlyos.name)
 
         if kalkulacio() >= bmi_ertekek.Túlsúlyos.value and kalkulacio() < bmi_ertekek.Extrém_túlsúlyos.value:
-            sor.append("- Elhízás //")
+            szemely.append("- Elhízás //")
 
         if kalkulacio() > bmi_ertekek.Extrém_túlsúlyos.value:
-            sor.append("- Extrém elhízás //")
+            szemely.append("- Extrém elhízás //")
 
+    #ha hiba van
     except ZeroDivisionError:
         print("A nulla nem jó érték.")
 
     except ValueError:
         print("Szám értéket kell megadni.")
-        del sor[1:]
+        #ha hibát talál az értékek között akkor kitörli a személy minden adatát
+        del szemely[1:]
 
+#Létrehozunk egy menüt, ahol a felhasználó eldöntheti, akar e új személyt hozzáadni
 menu = ""
 while menu != "0":
     menu_opciok()
@@ -94,23 +133,38 @@ while menu != "0":
     if menu == "1":
         uj_sor=[]
         nev = input("Kérem a személy nevét: ")
-        for sor in tomb:
+        for szemely in szemelyek:
             try:
-                tomb.append(uj_sor)
+                '''Létre hozunk egy teljesen új és üres kis-tömböt
+                ,hogy a nevet is el tudjuk benne tárolni, mert a fileba ez már nincs benne.'''
+                szemelyek.append(uj_sor)
 
                 uj_sor.append(nev)
 
+                '''Ugynaazt az eljárást és ellenőrzést használjuk, mint az előző személyeknél.'''
                 bmi.kor = int(input("- Kor: "))
+                if bmi.kor<1 or not float and not int:
+                    print("Valós értéket adjon meg.")
+                    bmi.kor = int(input("- Kor:"))
+
                 uj_sor.append("- Kor:")
                 uj_sor.append(str(bmi.kor))
                 uj_sor.append("éves |")
 
-                bmi.tomeg = float(input("Tömeg: "))
+                bmi.tomeg = float(input("Tömeg (kg): "))
+                if bmi.tomeg<1 or not float and not int:
+                    print("Valós értéket adjon meg.")
+                    bmi.tomeg = float(input("Tömeg (kg): "))
+
                 uj_sor.append("Tömeg:")
                 uj_sor.append(str(bmi.tomeg))
                 uj_sor.append("kg |")
 
-                bmi.magassag = float(input("Magasság: "))
+                bmi.magassag = float(input("Magasság (cm): "))
+                if bmi.magassag<1 or not float and not int:
+                    print("Valós értéket adjon meg.")
+                    bmi.magassag = float(input("Magasság (cm): "))
+                
                 uj_sor.append("Magasság:")
                 uj_sor.append(str(bmi.magassag))
                 uj_sor.append("cm |")
@@ -118,6 +172,7 @@ while menu != "0":
                 uj_sor.append(" -->  BMI: ")
                 uj_sor.append(str(kalkulacio()))
 
+                '''Leellenőrizzük, hogy a számolt bmi érték, melyik csoportba tartozik.'''
                 if kalkulacio() < bmi_ertekek.Alultáplált.value:
                     uj_sor.append("- %s //" % bmi_ertekek.Alultáplált.name)
 
@@ -136,17 +191,19 @@ while menu != "0":
                 break
 
             except ZeroDivisionError:
-                print("A nulla nem jó érték.")
+                print("A nullával nem osztunk.")
 
             except ValueError:
-                print("Szám értéket kell megadni.")
-                tomb.remove(uj_sor)
+                print("Szám értéket kell megadni. Adatait törölnünk kell.")
+                szemelyek.remove(uj_sor)
 
-fki.truncate()
-fki.seek(0)
+'''Kitöröljük a neveket a fájlból, hogy újból be tudjuk írni anélkül, hogy minden név kétszer legyen.'''
+file.truncate()
+file.seek(0)
 
-for sor in tomb:
-    x=(' '.join(sor))
-    fki.write(x+'\n')
+'''Kiírjuk a fileba az adatokat szemelyenkent.'''
+for szemely in szemelyek:
+    x=(' '.join(szemely))
+    file.write(x + '\n')
 
-fki.close()
+file.close()
