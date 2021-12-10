@@ -40,12 +40,12 @@ def menu_opciok():
     print("Válasszon a lehetőségek közül.\n\t0 - Kilépés"
           "\n\t1 - Új személy hozzáadása")
 
-szemelyek = [] #nagy tömb
-
 print("----------------------------------------------------")
 print("BMI Kalkulátor")
 print("----------------------------------------------------")
 print("Kérem a felhasználó törekedjen valós adatok megadására.")
+
+szemelyek = [] #nagy tömb
 
 '''Fájl megnyitása.'''
 file = open("névsor.txt", "r+", encoding="utf8")
@@ -214,7 +214,14 @@ file.seek(0)
 for szemely in szemelyek:
     x=(' '.join(szemely))
     file.write(x + '\n')
+    msgbox("Kiírt szöveg ({} adatai): ".format(szemely[0])+x,
+           title="Fájlba írt szöveg megjelenítése",
+           ok_button="Folytatás")
 
 file.close()
+
+msgbox("Elért a program végéhez.",
+           title="Program vége",
+           ok_button="Program vége")
 
 print("Program vége.")
