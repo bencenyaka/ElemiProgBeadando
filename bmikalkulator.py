@@ -41,15 +41,16 @@ def menu_opciok():
           "\n\t1 - Új személy hozzáadása")
 
 szemelyek = [] #nagy tömb
+
 print("----------------------------------------------------")
 print("BMI Kalkulátor")
 print("----------------------------------------------------")
 print("Kérem a felhasználó törekedjen valós adatok megadására.")
 
-'''File megnyitása.'''
+'''Fájl megnyitása.'''
 file = open("névsor.txt", "r+", encoding="utf8")
 
-'''A fileban tárolt adatokat eltároljuk kis-tömbökbe, amiket eltárolunk egy nagy tömbbe.'''
+'''A fájlból beolvasott adatokat eltároljuk kis-tömbökben, amiket eltárolunk egy nagy tömbben.'''
 for szemely in file:
     szemely = szemely.strip().split()
     szemelyek.append(szemely)
@@ -130,9 +131,12 @@ menu = ""
 while menu != "0":
     menu_opciok()
     menu = input()
+
+    '''Ha szeretne új személyt hozzáadni, akkor gyakorlatilag a főmodul indul újra kisebb változásokkal.'''
     if menu == "1":
         uj_sor=[]
         nev = input("Kérem a személy nevét: ")
+
         for szemely in szemelyek:
             try:
                 '''Létre hozunk egy teljesen új és üres kis-tömböt
@@ -140,6 +144,7 @@ while menu != "0":
                 szemelyek.append(uj_sor)
 
                 uj_sor.append(nev)
+                #név hozzáadva
 
                 '''Ugynaazt az eljárást és ellenőrzést használjuk, mint az előző személyeknél.'''
                 bmi.kor = int(input("- Kor: "))
@@ -150,6 +155,7 @@ while menu != "0":
                 uj_sor.append("- Kor:")
                 uj_sor.append(str(bmi.kor))
                 uj_sor.append("éves |")
+                #kor hozzáadva
 
                 bmi.tomeg = float(input("Tömeg (kg): "))
                 if bmi.tomeg<1 or not float and not int:
@@ -159,6 +165,7 @@ while menu != "0":
                 uj_sor.append("Tömeg:")
                 uj_sor.append(str(bmi.tomeg))
                 uj_sor.append("kg |")
+                #tömeg hozzáadva
 
                 bmi.magassag = float(input("Magasság (cm): "))
                 if bmi.magassag<1 or not float and not int:
@@ -168,9 +175,11 @@ while menu != "0":
                 uj_sor.append("Magasság:")
                 uj_sor.append(str(bmi.magassag))
                 uj_sor.append("cm |")
+                #magasság hozzáadva
 
                 uj_sor.append(" -->  BMI: ")
                 uj_sor.append(str(kalkulacio()))
+                #bmi érték hozzáadva
 
                 '''Leellenőrizzük, hogy a számolt bmi érték, melyik csoportba tartozik.'''
                 if kalkulacio() < bmi_ertekek.Alultáplált.value:
@@ -197,7 +206,7 @@ while menu != "0":
                 print("Szám értéket kell megadni. Adatait törölnünk kell.")
                 szemelyek.remove(uj_sor)
 
-'''Kitöröljük a neveket a fájlból, hogy újból be tudjuk írni anélkül, hogy minden név kétszer legyen.'''
+'''Kitöröljük a neveket a fájlból, hogy újból be tudjuk írni így nem kétszer lesznek benne.'''
 file.truncate()
 file.seek(0)
 
@@ -207,3 +216,5 @@ for szemely in szemelyek:
     file.write(x + '\n')
 
 file.close()
+
+print("Program vége.")
